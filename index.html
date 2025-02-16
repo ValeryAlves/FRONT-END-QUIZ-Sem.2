@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Naruto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .question {
+            display: none;
+        }
+        .question.active {
+            display: block;
+        }
+        .feedback {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .correta {
+            color: green;
+        }
+        .errada {
+            color: red;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        .quiz-image {
+            width: 500px; 
+            height: 350px; 
+            object-fit: cover; 
+        }
+    </style>
+</head>
+<body>
+    <h1>O Quanto Conhece Naruto?</h1>
+    <div id="quiz-container">
+        <!-- Pergunta 1 -->
+        <div class="question active" id="question1">
+            <h2>Pergunta 1</h2>
+            <img class="quiz-image" src="quiz 1.png" alt="Imagem da Kurama">
+            <p>Qual é o nome da raposa de nove caudas?</p>
+            <input type="radio" name="pergunta1" value="a"> Kurama<br>
+            <input type="radio" name="pergunta1" value="b"> Son Goku<br>
+            <input type="radio" name="pergunta1" value="c"> Saiken<br>
+            <input type="radio" name="pergunta1" value="d"> Shukaku<br>
+            <br>
+            <button onclick="nextQuestion(1, 'a')">Confirmar</button>
+            <div class="feedback"></div>
+        </div>
+        <!-- Pergunta 2 -->
+        <div class="question" id="question2">
+            <h2>Pergunta 2</h2>
+            <img class="quiz-image" src="quiz 2.png" alt="Imagem do Boruto">
+            <p>Qual é o nome do filho do Naruto?</p>
+            <input type="radio" name="pergunta2" value="a"> Karuto<br>
+            <input type="radio" name="pergunta2" value="b"> Daruto<br>
+            <input type="radio" name="pergunta2" value="c"> Boruto<br>
+            <input type="radio" name="pergunta2" value="d"> Saruto<br>
+            <br>
+            <button onclick="nextQuestion(2, 'c')">Confirmar</button>
+            <div class="feedback"></div>
+        </div>
+        <!-- Pergunta 3 e opções -->
+        <div class="question" id="question3">
+            <h2>Pergunta 3</h2>
+            <img class="quiz-image" src="quiz 3.png" alt="Imagem do Obito">
+            <p>Qual Nome Que Obito Usou Para Esconder Sua Identidade?</p>
+            <input type="radio" name="pergunta3" value="a"> Otobi<br>
+            <input type="radio" name="pergunta3" value="b"> Tobi<br>
+            <input type="radio" name="pergunta3" value="c"> Obima<br>
+            <input type="radio" name="pergunta3" value="d"> Matobi<br>
+            <br>
+            <button onclick="nextQuestion(3, 'b')">Confirmar</button>
+            <div class="feedback"></div>
+        </div>
+        <!-- Pergunta 4 e opções -->
+        <div class="question" id="question4">
+            <h2>Pergunta 4</h2>
+            <img class="quiz-image" src="quiz 4.png" alt="Imagem do Gaara">
+            <p>O que Esta Escrito Na Testa Do Gaara?</p>
+            <input type="radio" name="pergunta4" value="a"> Odio<br>
+            <input type="radio" name="pergunta4" value="b"> Amor<br>
+            <input type="radio" name="pergunta4" value="c"> Felicidade<br>
+            <input type="radio" name="pergunta4" value="d"> Esperança<br>
+            <br>
+            <button onclick="nextQuestion(4, 'b')">Confirmar</button>
+            <div class="feedback"></div>
+        </div>
+        <!-- Pergunta 5 e opções -->
+        <div class="question" id="question5">
+            <h2>Pergunta 5</h2>
+            <img class="quiz-image" src="quiz 5.jpg" alt="Imagem dos Hokages">
+            <p>Qual desses Hokage não gostava de Uchihas?</p>
+            <input type="radio" name="pergunta5" value="a"> Primeiro Hokage<br>
+            <input type="radio" name="pergunta5" value="b"> Terceiro Hokage<br>
+            <input type="radio" name="pergunta5" value="c"> Quarto Hokage<br>
+            <input type="radio" name="pergunta5" value="d"> Segundo Hokage<br>
+            <br>
+            <div id="feedbackPergunta5" class="feedback"></div>
+            <button onclick="nextQuestion(5, 'd')">Confirmar</button>
+            <div class="feedback"></div>
+        </div>
+    </div>
+    <div id="result" style="display: none;">
+        <img class="quiz-image" src="quiz .fim.webp" alt="imagem fim">
+        <h2 style="color: chartreuse;">Quiz Concluído!</h2>
+        <p id="score"></p>
+    </div>
+
+    <script>
+        let correctAnswers = 0;
+        const totalQuestions = 5; 
+
+        function nextQuestion(currentQuestion, correctAnswer) {
+            const currentElement = document.getElementById(`question${currentQuestion}`);
+            const selectedOption = document.querySelector(`input[name="pergunta${currentQuestion}"]:checked`);
+            const feedbackElement = currentElement.querySelector('.feedback');
+
+            if (selectedOption) {
+                if (selectedOption.value === correctAnswer) {
+                    correctAnswers++; 
+                    feedbackElement.textContent = "Resposta Correta!";
+                    feedbackElement.className = "feedback correta";
+                } else {
+                    feedbackElement.textContent = "Resposta Incorreta.";
+                    feedbackElement.className = "feedback errada";
+                }
+
+                setTimeout(() => {
+                    currentElement.classList.remove('active');
+                    const nextElement = document.getElementById(`question${currentQuestion + 1}`);
+                    if (nextElement) {
+                        nextElement.classList.add('active');
+                    } else {
+                        showResults();
+                    }
+                }, 1000);
+            } else {
+                alert("Por favor, selecione uma resposta.");
+            }
+        }
+
+        function showResults() {
+            document.getElementById("quiz-container").style.display = "none";
+            document.getElementById("result").style.display = "block";
+            document.getElementById("score").textContent = `Você acertou ${correctAnswers} de ${totalQuestions} perguntas!`;
+        }
+    </script>
+</body>
+</html>
