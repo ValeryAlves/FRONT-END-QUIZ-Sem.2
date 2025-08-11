@@ -1,6 +1,6 @@
 # 🍥 Quiz Naruto
 
-Um quiz interativo sobre o universo de **Naruto**, feito com **HTML**, **CSS** e **JavaScript**, criado para testar e divertir fãs do anime para a disciplina Front-End do 1º Semestre - 2ª semamna - do curso de Sistemas para Internet - IFMT. 
+Um quiz interativo sobre o universo de **Naruto**, feito com **HTML**, **CSS** e **JavaScript**, criado para testar e divertir fãs do anime para a disciplina Front-End do 1º Semestre - 2ª semana - do curso de Sistemas para Internet - IFMT. 
 O objetivo é responder corretamente as perguntas e descobrir o quanto você conhece da história e dos personagens.
 
 ## 🎯 Como jogar
